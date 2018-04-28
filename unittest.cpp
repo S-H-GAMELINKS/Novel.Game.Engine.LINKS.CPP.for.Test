@@ -48,9 +48,5 @@ namespace UnitTest
 			//イメージエフェクト読込関数
 			ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT/IE", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 		}
-
-		TEST_METHOD() {
-
-		}
 	};
 }
