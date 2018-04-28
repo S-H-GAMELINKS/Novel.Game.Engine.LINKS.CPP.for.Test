@@ -29,7 +29,6 @@ namespace UnitTest
 		{
 			std::array<int, MaterialMax> BackGround, Character, BackGroundMusic, SoundEffect, ImageEffect;
 			std::array<std::string, MaterialMax> Movie;
-			std::int32_t GameTitleGraph;
 
 			//背景画像読込関数
 			BackGround = MaterialLoad(BackGround, "DATA/BACKGROUND/BG", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
@@ -48,6 +47,10 @@ namespace UnitTest
 
 			//イメージエフェクト読込関数
 			ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT/IE", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+		}
+
+		TEST_METHOD() {
+
 		}
 	};
 }
