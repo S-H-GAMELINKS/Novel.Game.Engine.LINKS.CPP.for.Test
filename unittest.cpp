@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "Material_Manager.h"
-
-
-
+#include <iostream>
 #include <vector>
 #include <string>
 
@@ -19,8 +17,12 @@ namespace UnitTest
 		{
 			std::vector<std::string> Script;
 
-			for (int i = 0; i < 16; i++)
-				ScriptRead(Script, i);
+			for (int i = 0; i < 16; i++) {
+				Script = ScriptRead(i);
+
+				if (Script.empty())
+					std::cout << "Enpty!" << std::endl;
+			}
 		}
 
 		TEST_METHOD(LoadMaterial)
