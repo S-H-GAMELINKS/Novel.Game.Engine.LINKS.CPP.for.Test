@@ -53,7 +53,21 @@ namespace UnitTest
 		TEST_METHOD(ReturnKeyFunc) {
 
 			std::int32_t CursorPosY = TitleMenuPosY;
+			
+			//タイトルメニューのキー操作
 			CursorPosY = KeyState::GameTitleMenuKeyMove(CursorPosY);
+
+			//コンフィグ画面キー操作
+			CursorPosY = KeyState::ConfigMenuKeyMove(CursorPosY);
+
+			//ゲームメニューキー操作
+			CursorPosY = KeyState::GameMenuKeyMove(CursorPosY);
+
+			//選択肢キー操作
+			CursorPosY = KeyState::ChoiceKeyMove(CursorPosY);
+
+			//セーブデータメニューキー操作
+			CursorPosY = KeyState::SaveDataMenuKeyMove(CursorPosY);
 		}
 	};
 }

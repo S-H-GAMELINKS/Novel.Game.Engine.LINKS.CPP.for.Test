@@ -11,7 +11,7 @@ extern ConfigData_t ConfigData;
 namespace KeyState {
 
 	//タイトルメニューのキー操作
-	std::int32_t GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept {
+	std::int32_t GameTitleMenuKeyMove(std::int32_t CursorPosY) noexcept {
 
 		if (ConfigData.MouseAndKeyFlag == 0) {
 			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
@@ -27,7 +27,7 @@ namespace KeyState {
 	}
 
 	//コンフィグ画面キー操作
-	void ConfigMenuKeyMove(std::int32_t& ConfigCursorPosY) noexcept {
+	std::int32_t ConfigMenuKeyMove(std::int32_t ConfigCursorPosY) noexcept {
 		if (ConfigData.MouseAndKeyFlag == 0) {
 			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 				ConfigCursorPosY = (GameMenuBasePosY * 7 == ConfigCursorPosY) ? GameMenuBasePosY : ConfigCursorPosY + CursorMove;
@@ -37,10 +37,12 @@ namespace KeyState {
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
+
+		return ConfigCursorPosY;
 	}
 
 	//ゲームメニューキー操作
-	void GameMenuKeyMove(std::int32_t& GameMenuCursorPosY) noexcept {
+	std::int32_t GameMenuKeyMove(std::int32_t GameMenuCursorPosY) noexcept {
 		if (ConfigData.MouseAndKeyFlag == 0) {
 			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 				GameMenuCursorPosY = (GameMenuBasePosY * 12 == GameMenuCursorPosY) ? GameMenuBasePosY : GameMenuCursorPosY + GameMenuBasePosY;
@@ -50,10 +52,12 @@ namespace KeyState {
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
+
+		return GameMenuCursorPosY;
 	}
 
 	//選択肢キー操作
-	void ChoiceKeyMove(std::int32_t& ChoiceCursorPosY) noexcept {
+	std::int32_t ChoiceKeyMove(std::int32_t ChoiceCursorPosY) noexcept {
 		if (ConfigData.MouseAndKeyFlag == 0) {
 			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 				ChoiceCursorPosY = (ChoicePosY[1] == ChoiceCursorPosY) ? ChoicePosY[0] : ChoiceCursorPosY + CursorMove;
@@ -63,10 +67,12 @@ namespace KeyState {
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
+
+		return ChoiceCursorPosY;
 	}
 
 	//セーブデータメニューキー操作
-	void SaveDataMenuKeyMove(std::int32_t& SaveDataMenuPosY) noexcept {
+	std::int32_t SaveDataMenuKeyMove(std::int32_t SaveDataMenuPosY) noexcept {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 			SaveDataMenuPosY = (SaveDataPosButtom == SaveDataMenuPosY) ? SaveDataBasePosY : SaveDataMenuPosY + SaveDataCursorMove;
 
@@ -74,8 +80,9 @@ namespace KeyState {
 			SaveDataMenuPosY = (SaveDataBasePosY == SaveDataMenuPosY) ? SaveDataPosButtom : SaveDataMenuPosY - SaveDataCursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
 
+		return SaveDataMenuPosY;
+	}
 }
 
 namespace MouseState {
