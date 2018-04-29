@@ -11,7 +11,7 @@ extern ConfigData_t ConfigData;
 namespace KeyState {
 
 	//タイトルメニューのキー操作
-	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept {
+	std::int32_t GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept {
 
 		if (ConfigData.MouseAndKeyFlag == 0) {
 			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
@@ -22,6 +22,8 @@ namespace KeyState {
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
+
+		return CursorPosY;
 	}
 
 	//コンフィグ画面キー操作

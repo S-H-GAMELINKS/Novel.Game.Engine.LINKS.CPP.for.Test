@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "Material_Manager.h"
+#include "MouseAndKeyState.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -47,6 +48,12 @@ namespace UnitTest
 
 			//イメージエフェクト読込関数
 			ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT/IE", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+		}
+
+		TEST_METHOD(ReturnKeyFunc) {
+
+			std::int32_t CursorPosY = TitleMenuPosY;
+			CursorPosY = KeyState::GameTitleMenuKeyMove(CursorPosY);
 		}
 	};
 }

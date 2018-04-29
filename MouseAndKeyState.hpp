@@ -6,7 +6,7 @@
 namespace KeyState {
 
 	//タイトルメニューのキー操作
-	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept;
+	std::int32_t GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept;
 
 	//コンフィグ画面キー操作
 	void ConfigMenuKeyMove(std::int32_t& ConfigCursorPosY) noexcept;
