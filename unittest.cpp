@@ -69,5 +69,25 @@ namespace UnitTest
 			//セーブデータメニューキー操作
 			CursorPosY = KeyState::SaveDataMenuKeyMove(CursorPosY);
 		}
+
+		TEST_METHOD(ReturnMouceFunc) {
+
+			std::int32_t CursorPosY = TitleMenuPosY;
+
+			//タイトルメニューのマウス操作
+			CursorPosY = MouseState::GameTitleMenuMouseMove(CursorPosY);
+
+			//コンフィグ画面マウス操作
+			CursorPosY = MouseState::ConfigMenuMouseMove(CursorPosY);
+
+			//ゲームメニューのマウス操作
+			CursorPosY = MouseState::GameMenuMouseMove(CursorPosY);
+
+			//選択肢マウス操作
+			CursorPosY = MouseState::ChoiceMouseMove(CursorPosY);
+
+			//セーブデータメニューマウス操作
+			CursorPosY = MouseState::SaveDataMenuMouseMove(CursorPosY);
+		}
 	};
 }
