@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "Material_Manager.h"
 #include "MouseAndKeyState.hpp"
+#include "BackLog.h"
 #include <iostream>
 #include <vector>
 #include <string>
