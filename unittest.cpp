@@ -90,5 +90,13 @@ namespace UnitTest
 			//セーブデータメニューマウス操作
 			CursorPosY = MouseState::SaveDataMenuMouseMove(CursorPosY);
 		}
+
+		TEST_METHOD(BackLogLoopTest) {
+
+			for (std::int32_t i = 0; i < MaterialMax; i++)
+				BackLogGet();
+
+			BackLogLoop();
+		}
 	};
 }
