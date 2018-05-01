@@ -3,6 +3,7 @@
 #include "Material_Manager.h"
 #include "MouseAndKeyState.hpp"
 #include "BackLog.h"
+#include "Choice.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -97,6 +98,15 @@ namespace UnitTest
 				BackLogGet();
 
 			BackLogLoop();
+		}
+
+		TEST_METHOD(ChoiceSelectTest) {
+
+			std::int32_t EndFlag = 1;
+			std::int32_t RouteNumber = 1;
+
+			ChoiceSelect(RouteNumber);
+
 		}
 	};
 }
