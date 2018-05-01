@@ -3,6 +3,7 @@
 #include "Material_Manager.h"
 #include "MouseAndKeyState.hpp"
 #include "BackLog.h"
+#include "ConfigMenu.h"
 #include "Choice.h"
 #include <iostream>
 #include <vector>
@@ -106,6 +107,12 @@ namespace UnitTest
 			std::int32_t RouteNumber = 1;
 
 			ChoiceSelect(RouteNumber);
+
+		}
+
+		TEST_METHOD(ConfigMenuLoopTest) {
+
+			ConfigMenuLoop();
 
 		}
 	};
