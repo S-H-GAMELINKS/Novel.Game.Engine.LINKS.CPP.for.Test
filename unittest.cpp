@@ -119,13 +119,7 @@ namespace UnitTest
 
 		TEST_METHOD(GameMenuLoopTest) {
 
-			DxLib::DxLib_Init();
-
-			std::int32_t EndFlag = 17;
-
 			GameMenuLoop();
-
-			DxLib::DxLib_End();
 		}
 	};
 }
