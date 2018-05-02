@@ -4,6 +4,7 @@
 #include "MouseAndKeyState.hpp"
 #include "BackLog.h"
 #include "ConfigMenu.h"
+#include "GameMenu.h"
 #include "Choice.h"
 #include <iostream>
 #include <vector>
@@ -114,6 +115,17 @@ namespace UnitTest
 
 			ConfigMenuLoop();
 
+		}
+
+		TEST_METHOD(GameMenuLoopTest) {
+
+			DxLib::DxLib_Init();
+
+			std::int32_t EndFlag = 17;
+
+			GameMenuLoop();
+
+			DxLib::DxLib_End();
 		}
 	};
 }
