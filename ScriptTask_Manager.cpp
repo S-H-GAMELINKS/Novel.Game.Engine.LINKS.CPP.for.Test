@@ -34,6 +34,7 @@ extern struct ConfigData_t ConfigData;
 template <class T>
 using Material = const std::array<T, MaterialMax>;
 
+//スクリプト用エイリアス
 using Script = const std::vector<std::string>;
 
 namespace ScriptTask {
