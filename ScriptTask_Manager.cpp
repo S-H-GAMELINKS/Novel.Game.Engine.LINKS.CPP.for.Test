@@ -124,7 +124,7 @@ namespace ScriptTask {
 	}
 
 	//立ち絵描画関数
-	void DrawCharacter(Script& Script, const std::array<int, MaterialMax>& Character) noexcept {
+	void DrawCharacter(Script& Script, Material<int>& Character) noexcept {
 		Cp++;
 
 		ScriptTask::RemoveCharacterGraph();
@@ -134,7 +134,7 @@ namespace ScriptTask {
 	}
 
 	//BGM再生関数
-	void PlayBackGroundMusic(Script& Script, const std::array<int, MaterialMax>& BackGroundMusic) noexcept {
+	void PlayBackGroundMusic(Script& Script, Material<int>& BackGroundMusic) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
 		
@@ -148,7 +148,7 @@ namespace ScriptTask {
 	}
 
 	//効果音再生関数
-	void PlaySoundEffect(Script& Script, const std::array<int, MaterialMax>& SoundEffect) noexcept {
+	void PlaySoundEffect(Script& Script, Material<int>& SoundEffect) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
 
@@ -168,7 +168,7 @@ namespace ScriptTask {
 	}
 
 	//イメージエフェクト描画関数
-	void DrawImageEffect(Script& Script, const std::array<int, MaterialMax>& ImageEffect) {
+	void DrawImageEffect(Script& Script, Material<int>& ImageEffect) {
 		Cp++;
 		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, ImageEffectHandle, TRUE);
