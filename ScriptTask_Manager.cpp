@@ -112,10 +112,11 @@ namespace ScriptTask {
 	}
 
 	//背景画像描画関数
-	void DrawBackGround(Script& Script, Material<int>& BackGround) noexcept {
+	template <typename T, typename Func>
+	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle) noexcept {
 		Cp++;
-		BackGroundHandle = BackGround[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		Handle = Material[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		DrawFunc(Handle);
 	}
 
 	//立ち絵削除処理関数
@@ -168,13 +169,6 @@ namespace ScriptTask {
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
-	//イメージエフェクト描画関数
-	void DrawImageEffect(Script& Script, Material<int>& ImageEffect) {
-		Cp++;
-		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::DrawGraph(0, 0, ImageEffectHandle, TRUE);
-	}
-
 	//画面クリア処理関数
 	void ClearScreen() noexcept {
 		BackLogGet();
@@ -224,7 +218,7 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 	switch (Script[Sp][Cp])
 	{
 	case 'B':	//背景画像描画
-		ScriptTask::DrawBackGround(Script, BackGround);
+		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle);
 		break;
 
 	case 'C':	//立ち絵画像描画
@@ -244,7 +238,7 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'I':	//イメージエフェクト描画
-		ScriptTask::DrawImageEffect(Script, ImageEffect);
+		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle);
 		break;
 
 	case 'L':	//改行文字
