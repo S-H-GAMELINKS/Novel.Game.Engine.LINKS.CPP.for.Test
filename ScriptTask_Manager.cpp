@@ -34,6 +34,8 @@ extern struct ConfigData_t ConfigData;
 template <class T>
 using Material = const std::array<T, MaterialMax>;
 
+using Script = const std::vector<std::string>;
+
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
@@ -109,7 +111,7 @@ namespace ScriptTask {
 	}
 
 	//背景画像描画関数
-	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround) noexcept {
+	void DrawBackGround(Script& Script, Material<int>& BackGround) noexcept {
 		Cp++;
 		BackGroundHandle = BackGround[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
@@ -218,7 +220,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
+void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
