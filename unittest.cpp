@@ -6,6 +6,7 @@
 #include "ConfigMenu.h"
 #include "GameMenu.h"
 #include "Choice.h"
+#include "ScriptTask_Manager.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -120,6 +121,38 @@ namespace UnitTest
 		TEST_METHOD(GameMenuLoopTest) {
 
 			GameMenuLoop();
+		}
+
+		TEST_METHOD(ScriptTaskManagerTest) {
+
+			std::int32_t Sp = 0, Cp = 0;
+
+			std::vector<std::string> Script;
+
+			Script = ScriptRead(1);
+
+			std::array<int, MaterialMax> BackGround, Character, BackGroundMusic, SoundEffect, ImageEffect;
+			std::array<std::string, MaterialMax> Movie;
+
+			//背景画像読込関数
+			BackGround = MaterialLoad(BackGround, "DATA/BACKGROUND/BG", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+
+			//立ち絵画像読込関数
+			Character = MaterialLoad(Character, "DATA/CHARACTER/CHAR", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+
+			//BGM読込関数
+			BackGroundMusic = MaterialLoad(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
+
+			//SE読込関数
+			SoundEffect = MaterialLoad(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
+
+			//動画読込関数
+			Movie = MaterialLoad(Movie, "DATA/MOVIE/MOVIE", ".wmv", [](const std::string& Path) {return std::move(Path); });
+
+			//イメージエフェクト読込関数
+			ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT/IE", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+
+			ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect);
 		}
 	};
 }
