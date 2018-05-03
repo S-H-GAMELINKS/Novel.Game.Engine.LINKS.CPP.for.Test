@@ -185,8 +185,7 @@ namespace ScriptTask {
 	}
 
 	//ƒRƒƒ“ƒgˆ—ŠÖ”
-	template <typename T>
-	void Comment(const std::vector<T>& Script) noexcept {
+	void Comment(Script& Script) noexcept {
 		if (Script[Sp][Cp] == '/') {
 			Cp = 0;
 			Sp++;
