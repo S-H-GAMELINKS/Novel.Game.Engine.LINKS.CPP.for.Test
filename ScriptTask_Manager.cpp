@@ -30,6 +30,10 @@ extern int SkipAndAutoFlag;
 
 extern struct ConfigData_t ConfigData;
 
+//素材用エイリアス
+template <class T>
+using Material = const std::array<T, MaterialMax>;
+
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
@@ -214,7 +218,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie, const std::array<int, MaterialMax>& ImageEffect) noexcept {
+void ScriptTagTaskManager(const std::vector<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
