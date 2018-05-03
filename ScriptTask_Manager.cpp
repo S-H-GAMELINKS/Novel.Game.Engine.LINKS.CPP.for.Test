@@ -91,7 +91,7 @@ namespace ScriptTask {
 	}
 
 	//文字列描画関数
-	void DrawScript(const std::vector<std::string>& Script) noexcept {
+	void DrawScript(Script& Script) noexcept {
 		// １文字分抜き出す
 		OneMojiBuf[0] = Script[Sp][Cp];
 		OneMojiBuf[1] = Script[Sp][Cp + 1];
@@ -124,7 +124,7 @@ namespace ScriptTask {
 	}
 
 	//立ち絵描画関数
-	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) noexcept {
+	void DrawCharacter(Script& Script, const std::array<int, MaterialMax>& Character) noexcept {
 		Cp++;
 
 		ScriptTask::RemoveCharacterGraph();
@@ -134,7 +134,7 @@ namespace ScriptTask {
 	}
 
 	//BGM再生関数
-	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) noexcept {
+	void PlayBackGroundMusic(Script& Script, const std::array<int, MaterialMax>& BackGroundMusic) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
 		
@@ -148,7 +148,7 @@ namespace ScriptTask {
 	}
 
 	//効果音再生関数
-	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) noexcept {
+	void PlaySoundEffect(Script& Script, const std::array<int, MaterialMax>& SoundEffect) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
 
@@ -169,7 +169,7 @@ namespace ScriptTask {
 	}
 
 	//イメージエフェクト描画関数
-	void DrawImageEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& ImageEffect) {
+	void DrawImageEffect(Script& Script, const std::array<int, MaterialMax>& ImageEffect) {
 		Cp++;
 		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, ImageEffectHandle, TRUE);
