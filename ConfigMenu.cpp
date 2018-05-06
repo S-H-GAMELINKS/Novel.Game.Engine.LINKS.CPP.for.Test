@@ -183,15 +183,13 @@ namespace {
 
 	// マウス操作/キー操作切り替え
 	void MouseAndKeyMoveChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)))
 			ConfigData.MouseAndKeyFlag = 1;
-		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1)) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1))
 			ConfigData.MouseAndKeyFlag = 0;
-		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//コンフィグ画面選択処理
