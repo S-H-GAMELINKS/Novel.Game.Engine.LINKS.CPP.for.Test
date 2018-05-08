@@ -5,6 +5,7 @@
 #include "Choice.h"
 #include "ConfigMenu.h"
 #include "BackLog.h"
+#include "MouseAndKeyState.hpp"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -189,7 +190,7 @@ namespace ScriptTask {
 	void ClickWait() noexcept {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
-			if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT)))
+			if (MouseAndKey::CheckMouseAndKeyEnter())
 				Cp++;
 		}
 
