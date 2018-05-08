@@ -50,6 +50,11 @@ namespace {
 		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) ? true : false;
 	}
 
+	//マウス＆キー確認（左）
+	bool CheckMouseAndKeyLeft() {
+		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT)) ? true : false;
+	}
+
 	//BGM音量調節
 	void BackGroundMusicVolChange() noexcept {
 		
@@ -58,7 +63,7 @@ namespace {
 			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolume = 100 : ConfigData.BackGroundMusicVolume += 10;
 		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
+		if (CheckMouseAndKeyLeft()) {
 			ConfigData.BackGroundMusicVolumeCount = (ConfigData.BackGroundMusicVolumeCount <= 0) ? ConfigData.BackGroundMusicVolume = 0 : ConfigData.BackGroundMusicVolumeCount -= 1;
 			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount <= 0) ? ConfigData.BackGroundMusicVolumeCount = 0 : ConfigData.BackGroundMusicVolume -= 10;
 		}
@@ -73,7 +78,7 @@ namespace {
 			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolumeCount = 10 : ConfigData.SoundEffectVolumeCount += 1;
 		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
+		if (CheckMouseAndKeyLeft()) {
 			ConfigData.SoundEffectVolumeCount = (ConfigData.SoundEffectVolumeCount <= 0) ? ConfigData.SoundEffectVolume = 0 : ConfigData.SoundEffectVolume -= 10;
 			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount <= 0) ? ConfigData.SoundEffectVolumeCount = 0 : ConfigData.SoundEffectVolumeCount -= 1;
 		}
@@ -88,7 +93,7 @@ namespace {
 			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolume = 100 : ConfigData.AutoSpeedVolume += 10;
 		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
+		if (CheckMouseAndKeyLeft()) {
 			ConfigData.AutoSpeedVolumeCount = (ConfigData.AutoSpeedVolumeCount <= 0) ? ConfigData.AutoSpeedVolumeCount = 0 : ConfigData.AutoSpeedVolumeCount -= 1;
 			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount <= 0) ? ConfigData.AutoSpeedVolume = 0 : ConfigData.AutoSpeedVolume -= 10;
 		}
@@ -103,7 +108,7 @@ namespace {
 			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolume = 100 : ConfigData.SkipSpeedVolume += 10;
 		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
+		if (CheckMouseAndKeyLeft()) {
 			ConfigData.SkipSpeedVolumeCount = (ConfigData.SkipSpeedVolumeCount <= 0) ? ConfigData.SkipSpeedVolumeCount = 0 : ConfigData.SkipSpeedVolumeCount -= 1;
 			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount <= 0) ? ConfigData.SkipSpeedVolume = 0 : ConfigData.SkipSpeedVolume -= 10;
 		}
@@ -118,7 +123,7 @@ namespace {
 			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolume = 100 : ConfigData.ScriptDrawSpeedVolume += 10;
 		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1)) {
+		if (CheckMouseAndKeyLeft()) {
 			ConfigData.ScriptDrawSpeedVolumeCount = (ConfigData.ScriptDrawSpeedVolumeCount <= 0) ? ConfigData.ScriptDrawSpeedVolumeCount = 0 : ConfigData.ScriptDrawSpeedVolumeCount -= 1;
 			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount <= 0) ? ConfigData.ScriptDrawSpeedVolume = 0 : ConfigData.ScriptDrawSpeedVolume -= 10;
 		}
@@ -129,7 +134,7 @@ namespace {
 		if (CheckMouseAndKeyRight())
 			ConfigData.MouseAndKeyFlag = 1;
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1))
+		if (CheckMouseAndKeyLeft())
 			ConfigData.MouseAndKeyFlag = 0;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -156,7 +161,7 @@ namespace {
 		if (GameMenuBasePosY * 6 == ConfigCursorPosY)
 			MouseAndKeyMoveChange();
 
-		if ((GameMenuBasePosY * 7 == ConfigCursorPosY && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (GameMenuBasePosY * 7 == ConfigCursorPosY && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1)) {
+		if (GameMenuBasePosY * 7 == ConfigCursorPosY && CheckMouseAndKeyLeft()) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
 				ConfigFlag = false;
 			}
