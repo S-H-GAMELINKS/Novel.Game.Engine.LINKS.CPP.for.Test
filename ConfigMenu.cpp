@@ -45,10 +45,15 @@ namespace {
 		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), Color);
 	}
 
+	//マウス＆キー確認（右）
+	bool CheckMouseAndKeyRight() {
+		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) ? true : false;
+	}
+
 	//BGM音量調節
 	void BackGroundMusicVolChange() noexcept {
 		
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
+		if (CheckMouseAndKeyRight()) {
 			ConfigData.BackGroundMusicVolumeCount = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolumeCount = 10 : ConfigData.BackGroundMusicVolumeCount += 1;
 			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolume = 100 : ConfigData.BackGroundMusicVolume += 10;
 		}
@@ -63,7 +68,7 @@ namespace {
 
 	//SE音量調節
 	void SoundEffectVolChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
+		if (CheckMouseAndKeyRight()) {
 			ConfigData.SoundEffectVolumeCount = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolume = 100 : ConfigData.SoundEffectVolume += 10;
 			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolumeCount = 10 : ConfigData.SoundEffectVolumeCount += 1;
 		}
@@ -78,7 +83,7 @@ namespace {
 
 	//オート速度調節
 	void AutoSpeedVolChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
+		if (CheckMouseAndKeyRight()) {
 			ConfigData.AutoSpeedVolumeCount = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolumeCount = 10 : ConfigData.AutoSpeedVolumeCount += 1;
 			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolume = 100 : ConfigData.AutoSpeedVolume += 10;
 		}
@@ -93,7 +98,7 @@ namespace {
 
 	//スキップ速度調節
 	void SkipSpeedVolChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
+		if (CheckMouseAndKeyRight()) {
 			ConfigData.SkipSpeedVolumeCount = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolumeCount = 10 : ConfigData.SkipSpeedVolumeCount += 1;
 			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolume = 100 : ConfigData.SkipSpeedVolume += 10;
 		}
@@ -108,7 +113,7 @@ namespace {
 
 	//文字列描画速度調節
 	void StringDrawSpeedVolChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
+		if (CheckMouseAndKeyRight()) {
 			ConfigData.ScriptDrawSpeedVolumeCount = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolumeCount = 10 : ConfigData.ScriptDrawSpeedVolumeCount += 1;
 			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolume = 100 : ConfigData.ScriptDrawSpeedVolume += 10;
 		}
@@ -121,7 +126,7 @@ namespace {
 
 	// マウス操作/キー操作切り替え
 	void MouseAndKeyMoveChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)))
+		if (CheckMouseAndKeyRight())
 			ConfigData.MouseAndKeyFlag = 1;
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1))
