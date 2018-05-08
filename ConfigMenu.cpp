@@ -151,7 +151,7 @@ namespace {
 		if (GameMenuBasePosY * 6 == ConfigCursorPosY)
 			MouseAndKeyMoveChange();
 
-		if (GameMenuBasePosY * 7 == ConfigCursorPosY && MouseAndKey::CheckMouseAndKeyLeft()) {
+		if (GameMenuBasePosY * 7 == ConfigCursorPosY && MouseAndKey::CheckMouseAndKeyEnter()) {
 			if (IDYES == MessageBoxYesNo("ñﬂÇËÇ‹Ç∑Ç©ÅH")) {
 				ConfigFlag = false;
 			}
