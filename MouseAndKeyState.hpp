@@ -46,6 +46,9 @@ namespace MouseAndKey {
 
 	//マウス＆キー確認（左）
 	bool CheckMouseAndKeyLeft();
+
+	//マウス＆キー確認（決定）
+	bool CheckMouseAndKeyEnter();
 }
 
 #endif // !MOUSE_AND_KEY_STATE_
