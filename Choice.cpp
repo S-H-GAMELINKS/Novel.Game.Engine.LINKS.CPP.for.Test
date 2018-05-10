@@ -87,13 +87,13 @@ namespace {
 }
 
 //ëIëéàèàóùä÷êî
-void ChoiceSelect(const int& RoutteNumber) noexcept {
+void ChoiceSelect(const int& RouteNumber) noexcept {
 
 	ChoiceRead();
 
 	std::int32_t ChoiceCursorPosY = ChoicePosY[0];
 
-	while (EndFlag == RoutteNumber) {
+	while (EndFlag == RouteNumber) {
 		DrawChoice(ChoiceCursorPosY);
 		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1)? MouseState::ChoiceMouseMove(ChoiceCursorPosY) : KeyState::ChoiceKeyMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
