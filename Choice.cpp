@@ -6,6 +6,7 @@
 #include "BackLog.h"
 #include "ConfigMenu.h"
 #include "MouseAndKeyState.hpp"
+#include "GameMenu.h"
 #include <string>
 #include <fstream>
 #include <thread>
@@ -87,7 +88,7 @@ namespace {
 }
 
 //‘I‘ğˆˆ—ŠÖ”
-void ChoiceSelect(const int& RouteNumber) noexcept {
+void ChoiceSelect(const int RouteNumber) noexcept {
 
 	ChoiceRead();
 
