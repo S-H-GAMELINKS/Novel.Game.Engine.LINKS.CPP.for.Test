@@ -8,6 +8,9 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <boost/filesystem.hpp>
+
+namespace fs = boost::filesystem;
 
 extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
 
@@ -85,11 +88,14 @@ namespace {
 		std::string FileFormat = ".png";
 		std::string FileName = FilePath + std::to_string(Num) + FileFormat;
 
-		std::rename("DATA/SAVE/SAVESNSAPTEMP.png", FileName.c_str());
+		const fs::path path("DATA/SAVE/SAVESNSAPTEMP.png");
+		const fs::path dest(FileName.c_str());
+
+		fs::copy_file(path, dest, fs::copy_option::overwrite_if_exists);
 	}
 
 	//セーブデータをセーブ
-	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num) noexcept {
+	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num, const int& SaveSlot) noexcept {
 
 		if (IDYES == MessageBoxYesNo(Message)) {
 
@@ -106,7 +112,7 @@ namespace {
 			fclose(Fp);
 
 			//スクリーンショットの名前変更
-			SaveDataScreenShotRename(Num);
+			SaveDataScreenShotRename(SaveSlot);
 
 			MessageBoxOk("セーブしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -163,7 +169,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート切り替え関数
-	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag) noexcept {
+	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag, const int& SaveSlot) noexcept {
 
 		std::string Message = SaveDataName;
 		Message += SaveTaskItemParticle[Num - 1];
@@ -171,7 +177,7 @@ namespace {
 
 		//セーブ
 		if (Num == 1)
-			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str(), Num);
+			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str(), Num, SaveSlot);
 
 		//ロード
 		if (Num == 2)
@@ -186,19 +192,19 @@ namespace {
 	void SaveDataMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
 
 		if (SaveDataMenuPosY == SaveDataBasePosY && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag, 1);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
 		if (SaveDataMenuPosY == SaveDataBasePosY * 2 && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag);
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag, 2);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
 		if (SaveDataMenuPosY == SaveDataBasePosY * 3 && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag);
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag, 3);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
