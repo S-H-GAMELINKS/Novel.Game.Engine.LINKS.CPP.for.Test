@@ -154,6 +154,13 @@ namespace {
 		else
 			DrawGameScreenAgain();
 	}
+
+	//クイックセーブ
+	void QuickSave() {
+		SpTemp = Sp;
+		QuickSaveDataSave();
+		DrawGameScreenAgain();
+	}
 }
 
 //各種ショートカットキー
@@ -189,11 +196,8 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
 		BackToTitle();
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1) {
-		SpTemp = Sp;
-		QuickSaveDataSave();
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
+		QuickSave();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1) {
 		ScreenShotGet();
