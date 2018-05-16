@@ -109,6 +109,7 @@ void ScreenShotGet() noexcept {
 
 namespace {
 
+	//セーブデータ関連
 	void SaveData(const int Num) {
 		SpTemp = Sp;
 		SaveDataLoop(Num);
