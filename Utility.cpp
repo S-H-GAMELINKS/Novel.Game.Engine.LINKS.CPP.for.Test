@@ -122,6 +122,13 @@ namespace {
 		SkipAndAutoTask(Num);
 		DrawGameScreenAgain();
 	}
+
+	//バックログ関係
+	void BackLog() {
+		SpTemp = Sp;
+		BackLogLoop();
+		DrawGameScreenAgain();
+	}
 }
 
 //各種ショートカットキー
@@ -148,11 +155,8 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
 		SkipAndAuto(0);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1) {
-		SpTemp = Sp;
-		BackLogLoop();
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
+		BackLog();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1) {
 		SpTemp = Sp;
