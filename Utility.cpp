@@ -172,6 +172,17 @@ namespace {
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 	}
+
+	//ゲームメニュー
+	void GameMenu() {
+		SaveDataScreenShotGet();
+		DxLib::StopSoundMem(BackGroundMusicHandle);
+		DxLib::StopSoundMem(SoundEffectHandle);
+		EndFlagTemp = EndFlag;
+		SpTemp = Sp;
+		EndFlag = 17;
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitTimeCalc(WaitKeyTaskTime) / WaitGameTime));
+	}
 }
 
 //各種ショートカットキー
@@ -213,15 +224,8 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
 		ScreenShot();
 
-	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) {
-		SaveDataScreenShotGet();
-		DxLib::StopSoundMem(BackGroundMusicHandle);
-		DxLib::StopSoundMem(SoundEffectHandle);
-		EndFlagTemp = EndFlag;
-		SpTemp = Sp;
-		EndFlag = 17;
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitTimeCalc(WaitKeyTaskTime) / WaitGameTime));
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))
+		GameMenu();
 
 	//ゲーム終了確認ウインドウ
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
