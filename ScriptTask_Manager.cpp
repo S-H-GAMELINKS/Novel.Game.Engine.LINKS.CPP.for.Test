@@ -43,13 +43,17 @@ using Script = std::vector<std::string>;
 //立ち絵削除＆ゲームオーバー用エイリアス
 using unique = std::unique_ptr<int>;
 
+//タグ正規表現用エイリアス
+using ScriptTag = const std::pair<std::string, std::string>;
+
 //タグ正規表現
 std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back(\\d+)" },
 														 { "C(\\d+)", "draw_char(\\d+)" },
 														 { "M(\\d+)", "play_bgm(\\d+)" },
 														 { "S(\\d+)" , "play_se(\\d+)" },
 														 { "V(\\d+)","play_movie(\\d+)" },
-														 { "I(\\d+)", "draw_effect(\\d+)" } };
+														 { "I(\\d+)", "draw_effect(\\d+)" },
+														 { "L", "new_line" } };
 
 
 
@@ -330,6 +334,54 @@ namespace ScriptTask {
 
 		return false;
 	}
+
+	//システムタグチェック関数
+	bool SystemTag(Material <std::string>& Script, ScriptTag& Tag) {
+
+		for (int i = Cp; i < Script[Sp].length(); i++) {
+			if (Script[Sp][i] == Tag.first[0] || Script[Sp][i] == Tag.second[0]) {
+
+				std::string Str = Script[Sp];
+
+				sregex rex = sregex::compile(Tag.first);
+				smatch what;
+
+				if (regex_match(Script[Sp], what, rex)) {
+
+					Script[Sp] = regex_replace(Str, rex, "");
+
+					Cp = 0;
+
+					return true;
+				}
+
+				rex = sregex::compile(Tag.second);
+
+				if (regex_match(Script[Sp], what, rex)) {
+
+					Script[Sp] = regex_replace(Str, rex, "");
+
+					Cp = 0;
+
+					return true;
+				}
+			}
+		}
+
+
+		return false;
+	}
+
+	//各種システム処理
+	bool SystemTagTask(Material<std::string>& Script) {
+
+		if (SystemTag(Script, Tag[6])) {		//改行
+			ScriptTask::Kaigyou();
+			Cp++;
+		}
+
+		return false;
+	}
 }
 
 //スクリプトタグ処理関数
@@ -405,6 +457,10 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	default:	// その他の文字
+
+		//システム用タグ処理
+		if (ScriptTask::SystemTagTask(Script))
+			break;
 
 		//各種素材描画
 		if (ScriptTask::DrawMaterial(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect))
