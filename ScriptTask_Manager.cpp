@@ -227,13 +227,23 @@ namespace ScriptTask {
 	}
 
 	//画面クリア処理関数
-	void ClearScreen() noexcept {
+	void ClearScreen(Script& Script) noexcept {
 		BackLogGet();
 		ClearDrawScreen();
 		BackGroundHandle = 0;
 		CharacterHandle = 0;
 		DrawPointY = 0;
 		DrawPointX = 0;
+
+		std::string str = Script[Sp];
+
+		sregex rex = sregex::compile("R");
+		smatch what;
+
+		regex_search(str, what, rex);
+
+		Script[Sp] = regex_replace(str, rex, "");
+		Cp = 0;
 	}
 
 	//コメント処理関数
@@ -308,7 +318,7 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	case 'R':	//画面クリア
-		ScriptTask::ClearScreen();
+		ScriptTask::ClearScreen(Script);
 		Cp++;
 		break;
 
