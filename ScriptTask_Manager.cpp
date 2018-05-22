@@ -1,4 +1,6 @@
 //Script Tag Task Maneger Source
+#define _SCL_SECURE_NO_WARNINGS 
+
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
@@ -12,6 +14,9 @@
 #include <array>
 #include <thread>
 #include <chrono>
+#include <boost/xpressive/xpressive.hpp>
+
+using namespace boost::xpressive;
 
 extern int DrawPointX, DrawPointY;	// •¶š—ñ•`‰æ‚ÌˆÊ’u
 extern int Sp, Cp;	// QÆ‚·‚é•¶š—ñ”Ô†‚Æ•¶š—ñ’†‚Ì•¶šƒ|ƒCƒ“ƒ^
@@ -117,15 +122,25 @@ namespace ScriptTask {
 	}
 
 	//‘fŞ”Ô†ˆ—
-	int MaterialNumCheck(Script& Script) {
-		return (static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1;
+	int MaterialNumCheck(const Script& Script, const char* Tag) {
+
+		std::string str = Script[Sp];
+
+		sregex rex = sregex::compile(Tag);
+		smatch what;
+		regex_search(str, what, rex);
+		std::string text(what[1]);
+		int n = std::stoi(text);
+
+		return n - 1;
+
 	}
 
 	//”wŒi‰æ‘œ•`‰æŠÖ”
 	template <typename T, typename Func>
-	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle) noexcept {
+	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const char* Tag) noexcept {
 		Cp++;
-		Handle = Material[MaterialNumCheck(Script)];
+		Handle = Material[MaterialNumCheck(Script, Tag)];
 		DrawFunc(Handle);
 	}
 
@@ -141,7 +156,7 @@ namespace ScriptTask {
 
 		ScriptTask::RemoveCharacterGraph();
 
-		CharacterHandle = Character[MaterialNumCheck(Script)];
+		CharacterHandle = Character[MaterialNumCheck(Script, "C(\\d+)")];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
 	}
 
@@ -160,12 +175,12 @@ namespace ScriptTask {
 
 	//‰¹Œ¹Ä¶ŠÖ”
 	template <typename T>
-	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType) noexcept {
+	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const char* Tag) noexcept {
 		
 		CheckSoundPlay(Handle);
 
 		Cp++;
-		Handle = Material[MaterialNumCheck(Script)];
+		Handle = Material[MaterialNumCheck(Script, Tag)];
 
 		ChangeSoundVolumne();
 		
@@ -175,7 +190,7 @@ namespace ScriptTask {
 	//“®‰æÄ¶ŠÖ”
 	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
-		DxLib::PlayMovie(Movie[MaterialNumCheck(Script)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+		DxLib::PlayMovie(Movie[MaterialNumCheck(Script, "V(\\d+)")].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
 	//‰æ–ÊƒNƒŠƒAˆ—ŠÖ”
@@ -227,7 +242,7 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 	switch (Script[Sp][Cp])
 	{
 	case 'B':	//”wŒi‰æ‘œ•`‰æ
-		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle);
+		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, "B(\\d+)");
 		break;
 
 	case 'C':	//—§‚¿ŠG‰æ‘œ•`‰æ
@@ -235,11 +250,11 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'M':	//BGMÄ¶
-		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, "M(\\d+)");
 		break;
 
 	case 'S':	//SEÄ¶
-		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK);
+		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, "S(\\d+)");
 		break;
 
 	case 'V':	//“®‰æÄ¶
@@ -247,7 +262,7 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'I':	//ƒCƒ[ƒWƒGƒtƒFƒNƒg•`‰æ
-		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle);
+		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, "I(\\d+)");
 		break;
 
 	case 'L':	//‰üs•¶š
