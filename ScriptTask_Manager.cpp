@@ -1,5 +1,6 @@
 //Script Tag Task Maneger Source
 #define _SCL_SECURE_NO_WARNINGS 
+#define _CRT_SECURE_NO_WARNINGS 
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
@@ -37,7 +38,7 @@ template <class T>
 using Material = std::vector<T>;
 
 //スクリプト用エイリアス
-using Script = const std::vector<std::string>;
+using Script = std::vector<std::string>;
 
 //立ち絵削除＆ゲームオーバー用エイリアス
 using unique = std::unique_ptr<int>;
@@ -131,7 +132,7 @@ namespace ScriptTask {
 	}
 
 	//素材番号処理
-	int MaterialNumCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
+	int MaterialNumCheck(Script& Script, const std::pair<std::string, std::string>& Tag) {
 
 		std::string str = Script[Sp];
 
@@ -141,6 +142,9 @@ namespace ScriptTask {
 		if (regex_search(str, what, rex)) {
 			std::string text(what[1]);
 			int n = std::stoi(text);
+
+			Script[Sp] = regex_replace(str, rex, "");
+			Cp = 0;
 			
 			return n - 1;
 		}
@@ -150,6 +154,9 @@ namespace ScriptTask {
 		if (regex_search(str, what, rex)) {
 			std::string text(what[1]);
 			int n = std::stoi(text);
+
+			Script[Sp] = regex_replace(str, rex, "");
+			Cp = 0;
 			
 			return n - 1;
 		}
@@ -347,16 +354,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	case ' ':
-	case '0':
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case '6':
-	case '7':
-	case '8':
-	case '9':
 		Cp++;
 		break;
 
