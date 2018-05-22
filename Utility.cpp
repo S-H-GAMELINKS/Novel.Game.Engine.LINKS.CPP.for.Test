@@ -114,9 +114,9 @@ namespace {
 	}
 
 	//スキップ・オート関係
-	void SkipAndAuto(const int Num) {
+	void SkipAndAuto(const int Num, const int EndFlag) {
 		SpTemp = Sp;
-		SkipAndAutoTask(Num);
+		SkipAndAutoTask(Num, EndFlag);
 		DrawGameScreenAgain();
 	}
 
@@ -195,16 +195,16 @@ void ShortCutKey() noexcept {
 		SaveData(3);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
-		SkipAndAuto(3);
+		SkipAndAuto(3, EndFlag);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1)
-		SkipAndAuto(1);
+		SkipAndAuto(1, EndFlag);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1)
-		SkipAndAuto(2);
+		SkipAndAuto(2, EndFlag);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
-		SkipAndAuto(0);
+		SkipAndAuto(0, EndFlag);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
 		BackLog();

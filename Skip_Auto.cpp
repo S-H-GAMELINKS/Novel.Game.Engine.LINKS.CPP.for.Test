@@ -10,6 +10,9 @@
 //終了フラグ
 extern int EndFlag;
 
+//文字列描画位置
+extern int DrawPointX, DrawPointY;
+
 // 既読スキップ/スキップ/オート変数
 extern int SkipAndAutoFlag;
 
@@ -33,6 +36,8 @@ struct alignas(4) SkipData_t {
 	std::int32_t L;			//Lルートの既読情報
 	std::int32_t M;			//Mルートの既読情報
 	std::int32_t N;			//Nルートの既読情報
+	int* begin() { return &this->LINKS; };
+	int* end() { return &this->N + 1; };
 };
 
 //既読スキップデータ書き込み
@@ -59,21 +64,12 @@ int SkipDataLoad() noexcept {
 	}
 	fread(&Data, sizeof(SkipData_t), 1, Fp);
 
-	SkipData[0] = Data.LINKS;
-	SkipData[1] = Data.A;
-	SkipData[2] = Data.B;
-	SkipData[3] = Data.C;
-	SkipData[4] = Data.D;
-	SkipData[5] = Data.E;
-	SkipData[6] = Data.F;
-	SkipData[7] = Data.G;
-	SkipData[8] = Data.H;
-	SkipData[9] = Data.I;
-	SkipData[10] = Data.J;
-	SkipData[11] = Data.K;
-	SkipData[12] = Data.L;
-	SkipData[13] = Data.M;
-	SkipData[14] = Data.N;
+	std::int32_t i = 0;
+
+	for (auto&& d : Data) {
+		SkipData[i] = d;
+		i++;
+	}
 
 	fclose(Fp);
 	return 0;
@@ -98,33 +94,33 @@ int SkipDataSave() noexcept {
 }
 
 // 既読スキップ/スキップ/オート切り替え関数
-void SkipAndAutoTask(const std::int32_t& Num) noexcept {
+void SkipAndAutoTask(const std::int32_t& Num, const int Flag) noexcept {
 
 	if (Num == 0) {
-		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？")) {
+		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？"))
 			SkipAndAutoFlag = 0;
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
 
 	if (Num == 1) {
 		if (IDYES == MessageBoxYesNo("スキップを実行しますか？")) {
 			SkipAndAutoFlag = 1;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	if (Num == 2) {
 		if (IDYES == MessageBoxYesNo("オートを実行しますか？")) {
 			SkipAndAutoFlag = 2;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	if (Num == 3) {
 		if (IDYES == MessageBoxYesNo("既読スキップを実行しますか？")) {
 			SkipDataCheck(EndFlag);
 		}
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
+
+	EndFlag = Flag;
+	DrawPointX = 0;
+	DrawPointY = 0;
 }
