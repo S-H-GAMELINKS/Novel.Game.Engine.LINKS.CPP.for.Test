@@ -87,6 +87,7 @@ void SkipAndAutoTask(const std::int32_t& Num, const int Flag) noexcept {
 	if (Num == 0) {
 		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？"))
 			SkipAndAutoFlag = 0;
+	}
 
 	if (Num == 1) {
 		if (IDYES == MessageBoxYesNo("スキップを実行しますか？")) {
