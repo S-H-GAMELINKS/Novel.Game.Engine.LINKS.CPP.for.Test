@@ -95,12 +95,10 @@ namespace UnitTest
 			CursorPosY = MouseState::SaveDataMenuMouseMove(CursorPosY);
 		}
 
-		TEST_METHOD(BackLogLoopTest) {
+		TEST_METHOD(BackLogGetTest) {
 
 			for (std::int32_t i = 0; i < MaterialMax; i++)
 				BackLogGet();
-
-			BackLogLoop();
 		}
 
 		TEST_METHOD(ChoiceSelectTest) {
