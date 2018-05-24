@@ -121,11 +121,6 @@ namespace UnitTest
 			ConfigSave();
 		}
 
-		TEST_METHOD(GameMenuLoopTest) {
-
-			GameMenuLoop();
-		}
-
 		TEST_METHOD(ScriptTaskManagerTest) {
 
 			std::int32_t Sp = 0, Cp = 0;
