@@ -110,9 +110,9 @@ namespace UnitTest
 
 		}
 
-		TEST_METHOD(ConfigMenuLoopTest) {
+		TEST_METHOD(ConfigMenuLoadTest) {
 
-			ConfigMenuLoop();
+			ConfigLoad();
 
 		}
 
