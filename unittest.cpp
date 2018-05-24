@@ -116,6 +116,11 @@ namespace UnitTest
 
 		}
 
+		TEST_METHOD(ConfigSaveTest) {
+
+			ConfigSave();
+		}
+
 		TEST_METHOD(GameMenuLoopTest) {
 
 			GameMenuLoop();
