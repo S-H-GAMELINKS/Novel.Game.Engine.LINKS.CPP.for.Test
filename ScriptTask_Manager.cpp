@@ -58,7 +58,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "R", "clear_screen"},
 														 { "W", "wait_time"},
 														 { "G", "draw_gameover"},
-														 { "F", "play_ending_movie"} };
+														 { "F", "play_ending_movie"},
+														 { "O", "stop_bgm"} };
 
 
 
@@ -410,6 +411,11 @@ namespace ScriptTask {
 			Cp++;
 		}
 
+		if (SystemTag(Script, Tag[12])) {		//BGM停止
+			DxLib::StopSoundMem(BackGroundMusicHandle);
+			Cp++;
+		}
+
 		return false;
 	}
 }
@@ -419,11 +425,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 
 	switch (Script[Sp][Cp])
 	{
-
-	case 'F':	//エンディング画面
-		DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
-		Cp++;
-		break;
 
 	case 'O':	//BGM停止
 		DxLib::StopSoundMem(BackGroundMusicHandle);
