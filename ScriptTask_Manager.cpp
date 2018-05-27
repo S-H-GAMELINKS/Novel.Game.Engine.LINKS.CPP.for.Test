@@ -56,7 +56,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "L", "new_line" },
 														 { "P", "wait_key" },
 														 { "R", "clear_screen"},
-														 { "W", "wait_time"} };
+														 { "W", "wait_time"},
+														 { "G", "draw_gameover"} };
 
 
 
@@ -395,6 +396,11 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[9])) {		//遅延処理
 			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
+			Cp++;
+		}
+
+		if (SystemTag(Script, Tag[10])) {		//ゲームオーバー画面描画
+			ScriptTask::GameOverScreenDraw();
 			Cp++;
 		}
 
