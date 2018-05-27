@@ -57,7 +57,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "P", "wait_key" },
 														 { "R", "clear_screen"},
 														 { "W", "wait_time"},
-														 { "G", "draw_gameover"} };
+														 { "G", "draw_gameover"},
+														 { "F", "play_ending_movie"} };
 
 
 
@@ -404,6 +405,11 @@ namespace ScriptTask {
 			Cp++;
 		}
 
+		if (SystemTag(Script, Tag[11])) {		//エンディング画面描画
+			DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
+			Cp++;
+		}
+
 		return false;
 	}
 }
@@ -413,11 +419,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 
 	switch (Script[Sp][Cp])
 	{
-
-	case 'G':	//ゲームオーバー画面
-		ScriptTask::GameOverScreenDraw();
-		Cp++;
-		break;
 
 	case 'F':	//エンディング画面
 		DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
