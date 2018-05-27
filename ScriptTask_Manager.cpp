@@ -390,11 +390,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'L':	//改行文字
-		ScriptTask::Kaigyou();
-		Cp++;
-		break;
-
 	case 'P':	//クリック待ち
 		ScriptTask::ClickWait();
 		break;
