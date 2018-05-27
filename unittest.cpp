@@ -7,6 +7,7 @@
 #include "GameMenu.h"
 #include "Choice.h"
 #include "ScriptTask_Manager.h"
+#include "SaveData.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -151,6 +152,15 @@ namespace UnitTest
 			ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 			ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect);
+		}
+
+		TEST_METHOD(ContinueSaveTest) {
+
+			int EndFlag = 1;
+			int SpTemp, CharacterHandle, BackGroundHandle, BackGroundMusicHandle;
+
+			//クイックセーブ処理
+			ContinueSaveDataSave(EndFlag);
 		}
 	};
 }
