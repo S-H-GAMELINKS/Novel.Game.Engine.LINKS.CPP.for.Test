@@ -157,7 +157,6 @@ namespace UnitTest
 		TEST_METHOD(ContinueSaveTest) {
 
 			int EndFlag = 1;
-			int SpTemp, CharacterHandle, BackGroundHandle, BackGroundMusicHandle;
 
 			//クイックセーブ処理
 			ContinueSaveDataSave(EndFlag);
