@@ -55,7 +55,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "I(\\d+)", "draw_effect(\\d+)" },
 														 { "L", "new_line" },
 														 { "P", "wait_key" },
-														 { "R", "clear_screen"} };
+														 { "R", "clear_screen"},
+														 { "W", "wait_time"} };
 
 
 
@@ -389,6 +390,11 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[8])) {
 			ScriptTask::ClearScreen(Script);
+			Cp++;
+		}
+
+		if (SystemTag(Script, Tag[9])) {		//íxâÑèàóù
+			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
 			Cp++;
 		}
 
