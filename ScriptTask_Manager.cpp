@@ -53,7 +53,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "S(\\d+)" , "play_se(\\d+)" },
 														 { "V(\\d+)","play_movie(\\d+)" },
 														 { "I(\\d+)", "draw_effect(\\d+)" },
-														 { "L", "new_line" } };
+														 { "L", "new_line" },
+														 { "P", "wait_key" } };
 
 
 
@@ -377,6 +378,11 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[6])) {		//改行
 			ScriptTask::Kaigyou();
+			Cp++;
+		}
+
+		if (SystemTag(Script, Tag[7])) {		//クリック待ち
+			ScriptTask::ClickWait();
 			Cp++;
 		}
 
