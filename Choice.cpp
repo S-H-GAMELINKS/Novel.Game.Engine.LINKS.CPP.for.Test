@@ -84,9 +84,12 @@ void ChoiceSelect(const int RouteNumber) noexcept {
 
 	std::int32_t ChoiceCursorPosY = ChoicePosY[0];
 
+	using namespace MouseState;
+	using namespace KeyState;
+
 	while (EndFlag == RouteNumber) {
 		DrawChoice(ChoiceCursorPosY);
-		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1)? MouseState::ChoiceMouseMove(ChoiceCursorPosY) : KeyState::ChoiceKeyMove(ChoiceCursorPosY);
+		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1)? ChoiceMouseMove(ChoiceCursorPosY) : ChoiceKeyMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
 		ShortCutKey();
 		ScreenClear();
