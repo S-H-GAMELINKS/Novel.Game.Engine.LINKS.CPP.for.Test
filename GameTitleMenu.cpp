@@ -59,10 +59,14 @@ namespace {
 //タイトルメニューのループ関数
 void GameTitleMenuLoop(std::int32_t& CursorPosY) noexcept {
 
+	//ネームスペースの省略
+	using namespace MouseState;
+	using namespace KeyState;
+
 	while (EndFlag == 0) {
 		ScreenClear();
 		GameTitleMenuDraw(CursorPosY);
-		CursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::GameTitleMenuMouseMove(CursorPosY) : KeyState::GameTitleMenuKeyMove(CursorPosY);
+		CursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? GameTitleMenuMouseMove(CursorPosY) : GameTitleMenuKeyMove(CursorPosY);
 		GameTitleMenuChoice(CursorPosY);
 
 		//ゲーム終了確認ウインドウ
