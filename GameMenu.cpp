@@ -84,7 +84,7 @@ namespace {
 				SaveDataLoop(i + 1);
 		}
 
-		for (std::int32_t i = 0; i < 3; i++) {
+		for (std::int32_t i = 0; i < 4; i++) {
 			if (GameMenuCursorPosY == GameMenuBasePosY * (i + 4) && MouseAndKey::CheckMouseAndKeyEnter())
 				SkipAndAutoTask(SkipAutoTaskFlag[i], EndFlagTemp);
 		}
