@@ -249,8 +249,8 @@ void SaveDataLoop(const int& Num) noexcept {
 		while (SaveFlag == 1) {
 			ScreenClear();
 			SaveDataMenuDraw(SaveDataMenuPosY);
-			SaveDataMenuPosY = KeyState::SaveDataMenuKeyMove(SaveDataMenuPosY);
-			SaveDataMenuPosY = MouseState::SaveDataMenuMouseMove(SaveDataMenuPosY);
+			SaveDataMenuPosY = KeyState::KeyMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataPosButtom, SaveDataCursorMove, ConfigData.MouseAndKeyFlag);
+			SaveDataMenuPosY = MouseState::MouseMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataBasePosY, 4, ConfigData.MouseAndKeyFlag);
 			SaveDataMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}
 	}
