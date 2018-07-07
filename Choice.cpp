@@ -89,7 +89,8 @@ void ChoiceSelect(const int RouteNumber) noexcept {
 
 	while (EndFlag == RouteNumber) {
 		DrawChoice(ChoiceCursorPosY);
-		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1)? ChoiceMouseMove(ChoiceCursorPosY) : ChoiceKeyMove(ChoiceCursorPosY);
+		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1)? MouseMoveTemplate(ChoiceCursorPosY, (ChoicePosY[1] - CursorMove), CursorMove, 2, ConfigData.MouseAndKeyFlag)
+																: KeyMoveTemplate(ChoiceCursorPosY, ChoicePosY[0], ChoicePosY[1], CursorMove, ConfigData.MouseAndKeyFlag);
 		ChoiceSelectCheck(ChoiceCursorPosY);
 		ShortCutKey();
 		ScreenClear();
