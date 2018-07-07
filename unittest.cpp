@@ -14,6 +14,8 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+extern ConfigData_t ConfigData;
+
 namespace UnitTest
 {		
 	TEST_CLASS(UnitTest1)
@@ -61,19 +63,19 @@ namespace UnitTest
 			std::int32_t CursorPosY = TitleMenuPosY;
 			
 			//タイトルメニューのキー操作
-			CursorPosY = KeyState::GameTitleMenuKeyMove(CursorPosY);
+			CursorPosY = KeyState::KeyMoveTemplate(CursorPosY, TitleMenuPosY, TitleMenuExitPosY, CursorMove, ConfigData.MouseAndKeyFlag);
 
 			//コンフィグ画面キー操作
-			CursorPosY = KeyState::ConfigMenuKeyMove(CursorPosY);
+			CursorPosY = KeyState::KeyMoveTemplate(CursorPosY, GameMenuBasePosY, GameMenuBasePosY * 7, CursorMove, ConfigData.MouseAndKeyFlag);
 
 			//ゲームメニューキー操作
-			CursorPosY = KeyState::GameMenuKeyMove(CursorPosY);
+			CursorPosY = KeyState::KeyMoveTemplate(CursorPosY, GameMenuBasePosY, GameMenuBasePosY * 12, CursorMove, ConfigData.MouseAndKeyFlag);
 
 			//選択肢キー操作
-			CursorPosY = KeyState::ChoiceKeyMove(CursorPosY);
+			CursorPosY = KeyState::KeyMoveTemplate(CursorPosY, ChoicePosY[0], ChoicePosY[1], CursorMove, ConfigData.MouseAndKeyFlag);
 
 			//セーブデータメニューキー操作
-			CursorPosY = KeyState::SaveDataMenuKeyMove(CursorPosY);
+			CursorPosY = KeyState::KeyMoveTemplate(SaveDataBasePosY, SaveDataBasePosY, SaveDataPosButtom, SaveDataCursorMove, ConfigData.MouseAndKeyFlag);
 		}
 
 		TEST_METHOD(ReturnMouceFunc) {
@@ -81,19 +83,19 @@ namespace UnitTest
 			std::int32_t CursorPosY = TitleMenuPosY;
 
 			//タイトルメニューのマウス操作
-			CursorPosY = MouseState::GameTitleMenuMouseMove(CursorPosY);
+			CursorPosY = MouseState::MouseMoveTemplate(CursorPosY, TitleMenuPosY, CursorMove, 6, ConfigData.MouseAndKeyFlag);
 
 			//コンフィグ画面マウス操作
-			CursorPosY = MouseState::ConfigMenuMouseMove(CursorPosY);
+			CursorPosY = MouseState::MouseMoveTemplate(CursorPosY, GameMenuBasePosY, CursorMove, 7, ConfigData.MouseAndKeyFlag);
 
 			//ゲームメニューのマウス操作
-			CursorPosY = MouseState::GameMenuMouseMove(CursorPosY);
+			CursorPosY = MouseState::MouseMoveTemplate(CursorPosY, GameMenuBasePosY, CursorMove, 12, ConfigData.MouseAndKeyFlag);
 
 			//選択肢マウス操作
-			CursorPosY = MouseState::ChoiceMouseMove(CursorPosY);
+			CursorPosY = MouseState::MouseMoveTemplate(CursorPosY, (ChoicePosY[1] - CursorMove), CursorMove, 2, ConfigData.MouseAndKeyFlag);
 
 			//セーブデータメニューマウス操作
-			CursorPosY = MouseState::SaveDataMenuMouseMove(CursorPosY);
+			CursorPosY = MouseState::MouseMoveTemplate(SaveDataBasePosY, SaveDataBasePosY, SaveDataBasePosY, 4, ConfigData.MouseAndKeyFlag);
 		}
 
 		TEST_METHOD(BackLogGetTest) {
