@@ -199,10 +199,10 @@ namespace ScriptTask {
 
 	//”wŒi‰æ‘œ•`‰æŠÖ”
 	template <typename T, typename Func>
-	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
-		Cp++;
+	bool DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
 		Handle = Material[MaterialNumCheck(Script, Tag)];
 		DrawFunc(Handle);
+		return true;
 	}
 
 	//—§‚¿ŠGíœˆ—ŠÖ”
