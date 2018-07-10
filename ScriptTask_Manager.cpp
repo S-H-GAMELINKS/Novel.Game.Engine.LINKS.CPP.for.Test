@@ -324,6 +324,12 @@ namespace ScriptTask {
 		return true;
 	}
 
+	//音源関係の処理停止
+	bool StopSounds(const std::int32_t& SoundHandle) {
+		DxLib::StopSoundMem(SoundHandle);
+		return true;
+	}
+
 	//タグチェック関数
 	bool ScriptTagCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
 
