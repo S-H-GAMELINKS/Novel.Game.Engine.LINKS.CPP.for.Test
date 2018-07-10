@@ -305,6 +305,12 @@ namespace ScriptTask {
 
 	}
 
+	//遅延処理
+	bool WaitTime() {
+		std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
+		return true;
+	}
+
 	//ゲームオーバー画面の描画
 	void GameOverScreenDraw() {
 		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
