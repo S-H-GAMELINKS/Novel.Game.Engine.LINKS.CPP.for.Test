@@ -472,13 +472,14 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 
 	default:	// その他の文字
 
-		//システム用タグ処理
+				//システム用タグ処理
 		if (ScriptTask::SystemTagTask(Script))
 			break;
 
 		//各種素材描画
 		if (ScriptTask::DrawMaterial(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect))
 			break;
+
 
 		//文字列描画
 		ScriptTask::DrawScript(Script);
