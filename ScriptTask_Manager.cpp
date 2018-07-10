@@ -68,6 +68,8 @@ namespace ScriptTask {
 				Container.emplace_back(std::move(t));
 		}
 
+		file.close();
+
 		return Container;
 	}
 
