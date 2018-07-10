@@ -253,9 +253,10 @@ namespace ScriptTask {
 	}
 
 	//“®‰æÄ¶ŠÖ”
-	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
+	bool PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
 		DxLib::PlayMovie(Movie[MaterialNumCheck(Script, Tag[4])].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+		return true;
 	}
 
 	//‰æ–ÊƒNƒŠƒAˆ—ŠÖ”
