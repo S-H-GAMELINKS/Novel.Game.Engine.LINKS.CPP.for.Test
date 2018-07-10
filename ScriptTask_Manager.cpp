@@ -318,6 +318,12 @@ namespace ScriptTask {
 		return true;
 	}
 
+	//エンディング動画の再生
+	bool DrawEndingMovie() {
+		DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
+		return true;
+	}
+
 	//タグチェック関数
 	bool ScriptTagCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
 
