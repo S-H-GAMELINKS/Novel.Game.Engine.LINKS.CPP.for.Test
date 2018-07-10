@@ -238,7 +238,7 @@ namespace ScriptTask {
 
 	//‰¹Œ¹Ä¶ŠÖ”
 	template <typename T>
-	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const std::pair<std::string, std::string> Tag) noexcept {
+	bool PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const std::pair<std::string, std::string> Tag) noexcept {
 		
 		CheckSoundPlay(Handle);
 
@@ -248,6 +248,8 @@ namespace ScriptTask {
 		ChangeSoundVolumne();
 		
 		DxLib::PlaySoundMem(Handle, PlayType);
+
+		return true;
 	}
 
 	//“®‰æÄ¶ŠÖ”
