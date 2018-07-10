@@ -312,9 +312,10 @@ namespace ScriptTask {
 	}
 
 	//ゲームオーバー画面の描画
-	void GameOverScreenDraw() {
+	bool GameOverScreenDraw() {
 		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
 		DxLib::DrawGraph(0, 0, *GameOverHandle, TRUE);
+		return true;
 	}
 
 	//タグチェック関数
