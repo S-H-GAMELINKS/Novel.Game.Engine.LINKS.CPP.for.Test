@@ -174,30 +174,27 @@ namespace ScriptTask {
 
 		std::string str = Script[Sp];
 
-		sregex rex = sregex::compile(Tag.first);
 		smatch what;
 
-		if (regex_search(str, what, rex)) {
-			std::string text(what[1]);
-			int n = std::stoi(text);
+		std::array<std::string, 2> ScriptTagContainer = { Tag.first, Tag.second };
 
-			Script[Sp] = regex_replace(str, rex, "");
-			Cp = 0;
-			
-			return n - 1;
+		for (std::int32_t i = 0; i < 2; i++) {
+
+			sregex rex = sregex::compile(ScriptTagContainer[i]);
+
+			if (regex_search(str, what, rex)) {
+
+				std::string text(what[1]);
+				int n = std::stoi(text);
+
+				Script[Sp] = regex_replace(str, rex, "");
+				Cp = 0;
+
+				return n - 1;
+			}
 		}
 
-		rex = sregex::compile(Tag.second);
-		
-		if (regex_search(str, what, rex)) {
-			std::string text(what[1]);
-			int n = std::stoi(text);
-
-			Script[Sp] = regex_replace(str, rex, "");
-			Cp = 0;
-			
-			return n - 1;
-		}
+		return 0;
 	}
 
 	//”wŒi‰æ‘œ•`‰æŠÖ”
