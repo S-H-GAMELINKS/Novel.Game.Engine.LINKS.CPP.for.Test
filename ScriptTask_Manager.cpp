@@ -212,13 +212,15 @@ namespace ScriptTask {
 	}
 
 	//—§‚¿ŠG•`‰æŠÖ”
-	void DrawCharacter(Script& Script, Material<int>& Character) noexcept {
+	bool DrawCharacter(Script& Script, Material<int>& Character) noexcept {
 		Cp++;
 
 		ScriptTask::RemoveCharacterGraph();
 
 		CharacterHandle = Character[MaterialNumCheck(Script, Tag[1])];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
+
+		return true;
 	}
 
 	//‰¹—ÊƒZƒbƒgŠÖ”
