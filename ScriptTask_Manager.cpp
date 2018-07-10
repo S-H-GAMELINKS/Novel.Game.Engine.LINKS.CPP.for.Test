@@ -88,7 +88,7 @@ namespace ScriptTask {
 	std::vector<std::pair<std::string, std::string>> Tag = SettingScriptTag(LoadingScriptTag());
 
 	// 改行関数
-	void Kaigyou() noexcept {
+	bool Kaigyou() noexcept {
 		int TempGraph;
 
 		// 描画行位置を一つ下げる
@@ -118,6 +118,7 @@ namespace ScriptTask {
 			// グラフィックを削除する
 			DeleteGraph(TempGraph);
 		}
+		return true;
 	}
 
 	//文字速度関数
@@ -260,7 +261,7 @@ namespace ScriptTask {
 	}
 
 	//画面クリア処理関数
-	void ClearScreen(Script& Script) noexcept {
+	bool ClearScreen(Script& Script) noexcept {
 		BackLogGet();
 		ClearDrawScreen();
 		BackGroundHandle = 0;
@@ -277,6 +278,8 @@ namespace ScriptTask {
 
 		Script[Sp] = regex_replace(str, rex, "");
 		Cp = 0;
+
+		return true;
 	}
 
 	//コメント処理関数
@@ -288,11 +291,11 @@ namespace ScriptTask {
 	}
 
 	//クリック待ち処理関数
-	void ClickWait() noexcept {
+	bool ClickWait() noexcept {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
 			if (MouseAndKey::CheckMouseAndKeyEnter())
-				Cp++;
+				Cp = 0;//Cp++;
 		}
 
 		if (SkipAndAutoFlag == 1)
@@ -303,6 +306,7 @@ namespace ScriptTask {
 			Cp++;
 		}
 
+		return true;
 	}
 
 	//遅延処理
@@ -404,53 +408,29 @@ namespace ScriptTask {
 	//各種システム処理
 	bool SystemTagTask(Material<std::string>& Script) {
 
-		if (SystemTag(Script, Tag[6])) {		//改行
-			ScriptTask::Kaigyou();
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[6]))		//改行
+			return ScriptTask::Kaigyou();
 
-		if (SystemTag(Script, Tag[7])) {		//クリック待ち
-			ScriptTask::ClickWait();
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[7]))		//クリック待ち
+			return ScriptTask::ClickWait();
 
-		if (SystemTag(Script, Tag[8])) {
-			ScriptTask::ClearScreen(Script);
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[8])) 		//画面クリア処理
+			return ScriptTask::ClearScreen(Script);
 
-		if (SystemTag(Script, Tag[9])) {		//遅延処理
-			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[9]))		//遅延処理
+			return ScriptTask::WaitTime();
 
-		if (SystemTag(Script, Tag[10])) {		//ゲームオーバー画面描画
-			ScriptTask::GameOverScreenDraw();
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[10]))		//ゲームオーバー画面描画
+			return ScriptTask::GameOverScreenDraw();
 
-		if (SystemTag(Script, Tag[11])) {		//エンディング画面描画
-			DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[11]))		//エンディング画面描画
+			return ScriptTask::DrawEndingMovie();
 
-		if (SystemTag(Script, Tag[12])) {		//BGM停止
-			DxLib::StopSoundMem(BackGroundMusicHandle);
-			Cp++;
-			return true;
-		}
+		if (SystemTag(Script, Tag[12]))		//BGM停止
+			return ScriptTask::StopSounds(BackGroundMusicHandle);
 
-		if (SystemTag(Script, Tag[13])) {		//SE停止
-			Cp++;
-			DxLib::StopSoundMem(SoundEffectHandle);
-			return true;
-		}
+		if (SystemTag(Script, Tag[13]))		//SE停止
+			return ScriptTask::StopSounds(SoundEffectHandle);
 
 		if (SystemTag(Script, Tag[14])) {		//選択肢
 			ChoiceSelect(EndFlag);
@@ -459,7 +439,6 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[15])) {		//ゲーム終了
 			EndFlag = 99;
-			Cp++;
 			return true;
 		}
 
