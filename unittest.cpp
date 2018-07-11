@@ -6,7 +6,7 @@
 #include "ConfigMenu.hpp"
 #include "GameMenu.hpp"
 #include "Choice.hpp"
-#include "ScriptTask_Manager.h"
+#include "ScriptTask_Manager.hpp"
 #include "SaveData.hpp"
 #include <iostream>
 #include <vector>
