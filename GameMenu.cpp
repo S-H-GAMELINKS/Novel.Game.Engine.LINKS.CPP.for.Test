@@ -4,7 +4,7 @@
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
 #include "SaveData.h"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "Skip_Auto.h"
 #include "BackLog.hpp"
 #include "MouseAndKeyState.hpp"

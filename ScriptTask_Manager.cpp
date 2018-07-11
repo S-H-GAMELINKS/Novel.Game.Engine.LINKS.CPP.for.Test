@@ -6,7 +6,7 @@
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
 #include "Choice.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "BackLog.hpp"
 #include "MouseAndKeyState.hpp"
 #include <vector>

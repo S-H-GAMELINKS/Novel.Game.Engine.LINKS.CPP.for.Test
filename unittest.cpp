@@ -3,7 +3,7 @@
 #include "Material_Manager.h"
 #include "MouseAndKeyState.hpp"
 #include "BackLog.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "GameMenu.h"
 #include "Choice.hpp"
 #include "ScriptTask_Manager.h"
