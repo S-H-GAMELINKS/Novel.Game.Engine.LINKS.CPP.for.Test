@@ -1,6 +1,6 @@
 
 #include "DxLib.h"
-#include "ConstantExpressionVariable.h"
+#include "ConstantExpressionVariable.hpp"
 #include "ConfigMenu.hpp"
 #include <cstdint>
 #include <thread>

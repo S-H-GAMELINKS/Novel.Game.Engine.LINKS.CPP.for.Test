@@ -3,7 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS 
 
 #include "DxLib.h"
-#include "ConstantExpressionVariable.h"
+#include "ConstantExpressionVariable.hpp"
 #include "Utility.h"
 #include "Choice.hpp"
 #include "ConfigMenu.hpp"
