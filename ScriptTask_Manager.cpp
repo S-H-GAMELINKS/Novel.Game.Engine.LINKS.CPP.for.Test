@@ -7,7 +7,7 @@
 #include "Utility.h"
 #include "Choice.h"
 #include "ConfigMenu.h"
-#include "BackLog.h"
+#include "BackLog.hpp"
 #include "MouseAndKeyState.hpp"
 #include <vector>
 #include <string>

@@ -6,7 +6,7 @@
 #include "SaveData.h"
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
-#include "BackLog.h"
+#include "BackLog.hpp"
 #include "MouseAndKeyState.hpp"
 #include <thread>
 #include <chrono>
