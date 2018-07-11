@@ -5,7 +5,7 @@
 #include "BackLog.hpp"
 #include "ConfigMenu.h"
 #include "GameMenu.h"
-#include "Choice.h"
+#include "Choice.hpp"
 #include "ScriptTask_Manager.h"
 #include "SaveData.h"
 #include <iostream>

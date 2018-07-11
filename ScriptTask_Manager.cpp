@@ -5,7 +5,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
-#include "Choice.h"
+#include "Choice.hpp"
 #include "ConfigMenu.h"
 #include "BackLog.hpp"
 #include "MouseAndKeyState.hpp"
