@@ -6,7 +6,7 @@
 #include "BackLog.hpp"
 #include "ConfigMenu.hpp"
 #include "MouseAndKeyState.hpp"
-#include "GameMenu.h"
+#include "GameMenu.hpp"
 #include <string>
 #include <fstream>
 #include <thread>

@@ -4,7 +4,7 @@
 #include "MouseAndKeyState.hpp"
 #include "BackLog.hpp"
 #include "ConfigMenu.hpp"
-#include "GameMenu.h"
+#include "GameMenu.hpp"
 #include "Choice.hpp"
 #include "ScriptTask_Manager.h"
 #include "SaveData.h"
