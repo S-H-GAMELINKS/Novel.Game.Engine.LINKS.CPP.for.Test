@@ -7,7 +7,7 @@
 #include "GameTitleMenu.hpp"
 #include "GameMenu.hpp"
 #include "ConfigMenu.hpp"
-#include "Skip_Auto.h"
+#include "Skip_Auto.hpp"
 #include "SaveData.hpp"
 #include "Utility.h"
 #include "Variable.h"
