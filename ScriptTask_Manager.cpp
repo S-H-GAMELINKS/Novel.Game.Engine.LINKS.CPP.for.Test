@@ -4,7 +4,7 @@
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.hpp"
-#include "Utility.h"
+#include "Utility.hpp"
 #include "Choice.hpp"
 #include "ConfigMenu.hpp"
 #include "BackLog.hpp"

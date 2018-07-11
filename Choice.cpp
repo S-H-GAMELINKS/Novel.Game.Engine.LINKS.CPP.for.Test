@@ -2,7 +2,7 @@
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.hpp"
-#include "Utility.h"
+#include "Utility.hpp"
 #include "BackLog.hpp"
 #include "ConfigMenu.hpp"
 #include "MouseAndKeyState.hpp"
