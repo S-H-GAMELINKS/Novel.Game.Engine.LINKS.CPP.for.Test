@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "Material_Manager.h"
+#include "Material_Manager.hpp"
 #include "MouseAndKeyState.hpp"
 #include "BackLog.hpp"
 #include "ConfigMenu.hpp"
