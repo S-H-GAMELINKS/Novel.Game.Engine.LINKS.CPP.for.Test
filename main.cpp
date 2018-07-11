@@ -10,7 +10,7 @@
 #include "Skip_Auto.hpp"
 #include "SaveData.hpp"
 #include "Utility.hpp"
-#include "Variable.h"
+#include "Variable.hpp"
 #include <vector>
 #include <string>
 #include <fstream>
