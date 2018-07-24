@@ -191,7 +191,7 @@ void ShortCutKey() noexcept {
 
 	constexpr std::array<int, 4> SkipAndAutoFlag = { 3, 1, 2, 0 };
 
-	for (int i = 0; i < 3; i++) {
+	for (std::int32_t i = 0; i < 3; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
 			SaveData(i + 1);
 	}
