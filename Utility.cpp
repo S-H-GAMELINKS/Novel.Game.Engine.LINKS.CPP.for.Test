@@ -185,9 +185,9 @@ namespace {
 //各種ショートカットキー
 void ShortCutKey() noexcept {
 
-	std::array<int, 12> FuncKey = { KEY_INPUT_F1, KEY_INPUT_F2, KEY_INPUT_F3, KEY_INPUT_F4,
-									KEY_INPUT_F5, KEY_INPUT_F6, KEY_INPUT_F7, KEY_INPUT_F8,
-									KEY_INPUT_F9, KEY_INPUT_F10, KEY_INPUT_F11, KEY_INPUT_F12 };
+	constexpr std::array<int, 12> FuncKey = { KEY_INPUT_F1, KEY_INPUT_F2, KEY_INPUT_F3, KEY_INPUT_F4,
+											KEY_INPUT_F5, KEY_INPUT_F6, KEY_INPUT_F7, KEY_INPUT_F8,
+											KEY_INPUT_F9, KEY_INPUT_F10, KEY_INPUT_F11, KEY_INPUT_F12 };
 
 	for (int i = 0; i < 3; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
