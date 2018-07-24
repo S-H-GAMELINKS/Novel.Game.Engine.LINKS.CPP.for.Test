@@ -10,6 +10,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <array>
 
 //ゲームタイトル名
 extern const char* GameTitle;
@@ -184,14 +185,14 @@ namespace {
 //各種ショートカットキー
 void ShortCutKey() noexcept {
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
-		SaveData(1);
+	std::array<int, 12> FuncKey = { KEY_INPUT_F1, KEY_INPUT_F2, KEY_INPUT_F3, KEY_INPUT_F4,
+									KEY_INPUT_F5, KEY_INPUT_F6, KEY_INPUT_F7, KEY_INPUT_F8,
+									KEY_INPUT_F9, KEY_INPUT_F10, KEY_INPUT_F11, KEY_INPUT_F12 };
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
-		SaveData(2);
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1)
-		SaveData(3);
+	for (int i = 0; i < 3; i++) {
+		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
+			SaveData(i + 1);
+	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
 		SkipAndAuto(3, EndFlag);
