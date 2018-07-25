@@ -11,6 +11,7 @@
 #include <thread>
 #include <chrono>
 #include <array>
+#include <functional>
 
 //ゲームタイトル名
 extern const char* GameTitle;
