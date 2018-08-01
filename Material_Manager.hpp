@@ -23,10 +23,8 @@ namespace {
 		const fs::path path(Path);
 
 		for (const auto& p : boost::make_iterator_range(fs::directory_iterator(path), {})) {
-			if (!fs::is_directory(p.path())) {
-				std::string File = Path + "/" + p.path().filename().string();
-				Container.emplace_back(std::move(File));		
-			}
+			if (!fs::is_directory(p.path()))
+				Container.emplace_back(std::move(Path + "/" + p.path().filename().string()));
 		}
 
 		return Container;
