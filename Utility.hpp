@@ -19,4 +19,7 @@ void ShortCutKey() noexcept;
 //タイトルムービー処理
 void TitleMoviePlay() noexcept;
 
+//ウェイト処理
+void WaitTime() noexcept;
+
 #endif // !UTILITY_H_
