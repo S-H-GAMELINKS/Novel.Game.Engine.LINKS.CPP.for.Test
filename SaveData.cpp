@@ -131,7 +131,7 @@ namespace {
 			SaveDataScreenShotRename(SaveSlot);
 
 			MessageBoxOk("セーブしました！");
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 		return 0;
 	}
@@ -157,7 +157,7 @@ namespace {
 			LoadingSaveData(SaveData);
 
 			MessageBoxOk("ロードしました！");
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 
 			DrawGameScreen();
 		}
@@ -170,7 +170,7 @@ namespace {
 			std::remove(SaveDataPath);
 
 			MessageBoxOk("削除しました！");
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 		return 0;
 	}
@@ -201,7 +201,7 @@ namespace {
 		for (std::int32_t i = 0; i < 3; i++) {
 			if (SaveDataMenuPosY == SaveDataBasePosY * (i + 1) && MouseAndKey::CheckMouseAndKeyEnter()) {
 				SaveDataTask(Num, SaveData[i], SaveDataName[i], SaveFlag, (i + 1));
-				std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+				WaitTime();
 			}
 		}
 
@@ -209,9 +209,9 @@ namespace {
 
 			if (IDYES == MessageBoxYesNo("戻りますか？")){
 				SaveFlag = 0;
-				std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+				WaitTime();
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 	}
 }
@@ -226,7 +226,7 @@ void SaveDataLoop(const int& Num) noexcept {
 		std::int32_t SaveFlag = 1;
 
 		DxLib::ClearDrawScreen();
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 
 		//スクリーンショットの読込
 		SaveDataSnapLoad();
@@ -244,7 +244,7 @@ void SaveDataLoop(const int& Num) noexcept {
 		}
 	}
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+	WaitTime();
 }
 
 //セーブデータをセーブ(Quick)
@@ -265,7 +265,7 @@ int QuickSaveDataSave() noexcept {
 		fclose(Fp);
 
 		MessageBoxOk("セーブしました！");
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 	}
 	return 0;
 }
@@ -291,7 +291,7 @@ int QuickSaveDataLoad() noexcept {
 		LoadingSaveData(SaveData);
 
 		MessageBoxOk("ロードしました！");
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 
 		DrawGameScreen();
 	}
@@ -337,7 +337,7 @@ int ContinueSaveDataLoad() noexcept {
 		LoadingSaveData(SaveData);
 
 		MessageBoxOk("ロードしました！");
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 
 		DrawGameScreen();
 	}
