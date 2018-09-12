@@ -61,7 +61,7 @@ namespace {
 			Param = (Count <= 0) ? Param = 0 : Param -= 10;
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 	}
 
 	// マウス操作/キー操作切り替え
@@ -72,7 +72,7 @@ namespace {
 		if (MouseAndKey::CheckMouseAndKeyLeft())
 			ConfigData.MouseAndKeyFlag = 0;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 	}
 
 	//コンフィグ画面選択処理
@@ -100,7 +100,7 @@ namespace {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
 				ConfigFlag = false;
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 
 		return ConfigFlag;
