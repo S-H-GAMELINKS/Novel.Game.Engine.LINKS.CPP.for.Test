@@ -4,7 +4,7 @@
 #include <cstdint>
 
 //既読スキップデータ書き込み
-constexpr void SkipDataWrite(const std::int32_t& RouteNum) noexcept;
+void SkipDataWrite(const std::int32_t& RouteNum) noexcept;
 
 //既読判定
 constexpr void SkipDataCheck(const std::int32_t& RouteNum) noexcept;
