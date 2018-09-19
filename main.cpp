@@ -51,7 +51,7 @@ void DxLibInitPostProccessing() noexcept {
 	DxLib::ChangeFontType(DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
 
 	//コンフィグ読込関数
-	ConfigLoad();
+	ConfigDataTemplate(fread, ConfigData, "rb");
 
 	//背景画像読込関数
 	BackGround = MaterialLoad(BackGround, "DATA/BACKGROUND", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
@@ -151,7 +151,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			GameMenuLoop();
 	}
 
-	ConfigSave();	// 設定データの保存
+	ConfigDataTemplate(fwrite, ConfigData, "wb");	// 設定データの保存
 	SkipDataSave(); // 既読スキップデータの保存
 
 	for (auto&& file : RemoveFile)
