@@ -17,6 +17,8 @@
 #include <thread>
 #include <chrono>
 
+extern ConfigData_t ConfigData;
+
 
 //DxLib初期化前処理
 void DxLibInitPreProccessing() noexcept {
