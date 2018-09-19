@@ -115,13 +115,13 @@ namespace UnitTest
 
 		TEST_METHOD(ConfigMenuLoadTest) {
 
-			ConfigLoad();
+			ConfigDataTemplate(fread, ConfigData, "rb");
 
 		}
 
 		TEST_METHOD(ConfigSaveTest) {
 
-			ConfigSave();
+			ConfigDataTemplate(fwrite, ConfigData, "wb");
 		}
 
 		TEST_METHOD(ScriptTaskManagerTest) {
