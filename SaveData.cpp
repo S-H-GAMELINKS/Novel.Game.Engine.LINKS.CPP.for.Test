@@ -56,7 +56,7 @@ namespace {
 	};
 
 	//セーブデータ用スクリーンショット読込関数
-	void SaveDataSnapLoad() noexcept {
+	constexpr void SaveDataSnapLoad() noexcept {
 
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
 			SaveSnap[i] = DxLib::LoadGraph(SaveDataSnapPath[i].c_str());
