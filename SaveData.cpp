@@ -81,10 +81,9 @@ namespace {
 
 	//スクリーンショット名前変更
 	void SaveDataScreenShotRename(const int& Num) noexcept {
-		std::string FileName = "DATA/SAVE/SAVESNAP" + std::to_string(Num) + ".png";
 
 		const fs::path path("DATA/SAVE/SAVESNSAPTEMP.png");
-		const fs::path dest(FileName.c_str());
+		const fs::path dest(SaveDataSnapPath[Num - 1].c_str());
 
 		fs::copy_file(path, dest, fs::copy_option::overwrite_if_exists);
 	}
