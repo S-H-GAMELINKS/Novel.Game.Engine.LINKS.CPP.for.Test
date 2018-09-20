@@ -5,6 +5,7 @@
 #include "Utility.hpp"
 #include "ConfigMenu.hpp"
 #include "MouseAndKeyState.hpp"
+#include <array>
 #include <string>
 #include <thread>
 #include <chrono>
@@ -40,6 +41,10 @@ namespace {
 	//セーブデータ名描画用配列
 	static constexpr const char* SaveDataName[] = { "セーブデータ1", "セーブデータ2", "セーブデータ3" };
 	static constexpr const char* SaveData[] = { "DATA/SAVE/SAVEDATA1.bat" , "DATA/SAVE/SAVEDATA2.bat" , "DATA/SAVE/SAVEDATA3.bat" };
+
+	//セーブデータ用スクリーンショットPath
+	const std::array<std::string, 3> SaveDataSnapPath = { "DATA/SAVE/SAVESNAP1.png", "DATA/SAVE/SAVESNAP2.png", "DATA/SAVE/SAVESNAP3.png" };
+
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
 		std::int32_t EndFlag;    //EndFlag
@@ -52,16 +57,9 @@ namespace {
 
 	//セーブデータ用スクリーンショット読込関数
 	void SaveDataSnapLoad() noexcept {
-		std::string FilePath = "DATA/SAVE/SAVESNAP";
-		std::string FileFormat = ".png";
-		std::string FileName = "";
 
-		for (std::int32_t i = 0; i < SaveDataSlotNum; i++) {
-
-			FileName = (FilePath + std::to_string(i + 1) + FileFormat);
-
-			SaveSnap[i] = DxLib::LoadGraph(FileName.c_str());
-		}
+		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
+			SaveSnap[i] = DxLib::LoadGraph(SaveDataSnapPath[i].c_str());
 	}
 
 	//セーブデータ メニュー描画
