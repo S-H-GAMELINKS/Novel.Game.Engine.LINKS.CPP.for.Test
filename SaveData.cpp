@@ -89,7 +89,7 @@ namespace {
 	}
 
 	//セーブデータ適用処理
-	void LoadingSaveData(const SaveData_t& SaveData){
+	constexpr void LoadingSaveData(const SaveData_t& SaveData){
 		EndFlag = SaveData.EndFlag;
 		Sp = SaveData.Sp;
 		Cp = SaveData.Cp;
