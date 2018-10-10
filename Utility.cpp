@@ -103,6 +103,14 @@ void ScreenShotGet() noexcept {
 
 namespace {
 
+	//ショートカットキーテンプレート
+	template <typename F>
+	void ShortcutKeyTemplate(F&& func) {
+		SpTemp = Sp;
+		func();
+		DrawGameScreenAgain();
+	}
+
 	//セーブデータ関連
 	void SaveData(const int Num) {
 		SpTemp = Sp;
@@ -117,20 +125,6 @@ namespace {
 		DrawGameScreenAgain();
 	}
 
-	//バックログ関係
-	void BackLog() {
-		SpTemp = Sp;
-		BackLogLoop();
-		DrawGameScreenAgain();
-	}
-
-	//コンフィグ関係
-	void Config() {
-		SpTemp = Sp;
-		ConfigMenuLoop();
-		DrawGameScreenAgain();
-	}
-
 	//タイトルへ戻る
 	void BackToTitle() {
 		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
@@ -141,13 +135,6 @@ namespace {
 		}
 		else
 			DrawGameScreenAgain();
-	}
-
-	//クイックセーブ
-	void QuickSave() {
-		SpTemp = Sp;
-		QuickSaveDataSave();
-		DrawGameScreenAgain();
 	}
 
 	//スクリーンショット
@@ -180,7 +167,7 @@ void ShortCutKey() noexcept {
 
 	constexpr std::array<int, 4> SkipAndAutoFlag = { 3, 1, 2, 0 };
 
-	const std::array<std::function<void()>, 5> Funcs = { BackLog, Config, BackToTitle, QuickSave, ScreenShot };
+	const std::array<std::function<void()>, 4> Funcs = { BackLogLoop, ConfigMenuLoop, BackToTitle, QuickSaveDataSave };
 
 	for (std::int32_t i = 0; i < 3; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
@@ -192,10 +179,13 @@ void ShortCutKey() noexcept {
 			SkipAndAuto(SkipAndAutoFlag[i], EndFlag);
 	}
 
-	for (std::int32_t i = 0; i < 5; i++) {
+	for (std::int32_t i = 0; i < 4; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i + 7]) == 1)
 			Funcs[i]();
 	}
+
+	if (DxLib::CheckHitKey(FuncKey[11] == 1))
+		ScreenShot();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))
 		GameMenu();
