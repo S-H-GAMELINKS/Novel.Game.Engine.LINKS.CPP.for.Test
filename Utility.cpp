@@ -193,7 +193,7 @@ void ShortCutKey() noexcept {
 	}
 
 	for (std::int32_t i = 0; i < 5; i++) {
-		if (DxLib::CheckHitKey(FuncKey[i + 5]) == 1)
+		if (DxLib::CheckHitKey(FuncKey[i + 7]) == 1)
 			Funcs[i]();
 	}
 
