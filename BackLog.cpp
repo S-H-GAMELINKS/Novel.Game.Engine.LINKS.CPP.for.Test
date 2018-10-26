@@ -61,9 +61,9 @@ namespace BackLog {
 //バックログ取得
 void BackLogGet() noexcept {
 	DxLib::SetDrawScreen(DX_SCREEN_BACK);
-	DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+	DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG.png");
 	++BackLog::BackLogCount;
-	BackLog::BackLog.emplace_back(std::move(DxLib::LoadGraph("DATA/BACKLOG/BACKLOG1.png")));
+	BackLog::BackLog.emplace_back(std::move(DxLib::LoadGraph("DATA/BACKLOG/BACKLOG.png")));
 	DxLib::SetDrawScreen(DX_SCREEN_FRONT);
 }
 
